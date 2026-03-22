@@ -2,125 +2,113 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Bí mật dành cho bạn 😏</title>
+<title>Bí mật 😏</title>
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        font-family: Arial, sans-serif;
-        background: url("https://images.unsplash.com/photo-1517841905240-472988babdf9") no-repeat center/cover;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial;
+    background: linear-gradient(135deg, #000000, #1e90ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+}
 
-    .overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.6);
-    }
+.container {
+    text-align: center;
+}
 
-    .container {
-        position: relative;
-        text-align: center;
-        color: white;
-        z-index: 2;
-        animation: fadeIn 2s ease;
-    }
+h1 {
+    font-size: 40px;
+}
 
-    h1 {
-        font-size: 42px;
-        margin-bottom: 20px;
-    }
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.2s;
+}
 
-    p {
-        font-size: 20px;
-        margin-bottom: 30px;
-    }
+#yesBtn {
+    background: #00ffcc;
+}
 
-    button {
-        padding: 15px 30px;
-        font-size: 18px;
-        border-radius: 30px;
-        border: none;
-        cursor: pointer;
-        background: #ff4e50;
-        color: white;
-        transition: 0.3s;
-    }
+#noBtn {
+    background: red;
+    position: absolute;
+}
 
-    button:hover {
-        transform: scale(1.1);
-        background: #ff0000;
-    }
+#message {
+    margin-top: 30px;
+    font-size: 35px;
+    display: none;
+}
 
-    #message {
-        margin-top: 30px;
-        font-size: 32px;
-        display: none;
-        animation: pop 0.8s ease;
-    }
+/* pháo hoa */
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: yellow;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
 
-    @keyframes fadeIn {
-        from {opacity:0; transform:translateY(50px);}
-        to {opacity:1; transform:translateY(0);}
-    }
-
-    @keyframes pop {
-        0% {transform: scale(0);}
-        100% {transform: scale(1);}
-    }
-
-    .heart {
-        position: absolute;
-        color: red;
-        font-size: 20px;
-        animation: floatUp 4s linear infinite;
-    }
-
-    @keyframes floatUp {
-        from {transform: translateY(100vh); opacity:1;}
-        to {transform: translateY(-10vh); opacity:0;}
-    }
+@keyframes explode {
+    from {transform: scale(1); opacity:1;}
+    to {transform: scale(20); opacity:0;}
+}
 </style>
 
 </head>
 
 <body>
 
-<div class="overlay"></div>
-
 <div class="container">
-    <h1>👀 Có điều này muốn nói với bạn...</h1>
-    <p>Bấm nút bên dưới để xem💖</p>
-    <button onclick="showMessage()">Bấm đi 😎</button>
+    <h1>Bạn có muốn xem bí mật không? 😏</h1>
+    <button id="yesBtn">Có 😎</button>
+    <button id="noBtn">Không 😏</button>
 
-    <div id="message">😏 Nhìn cái chó gì 😏</div>
+    <div id="message">👉 Mày nhìn cái chó gì👈</div>
 </div>
 
+<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
 <script>
-function showMessage() {
+// nút né chuột
+let noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.top = Math.random() * 80 + "%";
+    noBtn.style.left = Math.random() * 80 + "%";
+});
+
+// bấm có
+document.getElementById("yesBtn").onclick = function() {
     document.getElementById("message").style.display = "block";
-}
+    document.getElementById("music").play();
 
-// tạo trái tim bay
-setInterval(() => {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (10 + Math.random()*20) + "px";
+    // pháo hoa
+    for (let i = 0; i < 20; i++) {
+        let fw = document.createElement("div");
+        fw.className = "firework";
+        fw.style.top = Math.random() * 100 + "vh";
+        fw.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(fw);
 
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 4000);
-}, 300);
+        setTimeout(() => fw.remove(), 1000);
+    }
+};
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
