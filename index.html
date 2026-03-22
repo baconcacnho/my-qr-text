@@ -1,71 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <title>Bí mật 😏</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff4e50, #1e90ff);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial;
-            color: white;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<title>Bí mật dành cho bạn 😏</title>
 
-        .box {
-            text-align: center;
-            animation: fadeIn 2s ease;
-        }
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background: url("https://images.unsplash.com/photo-1517841905240-472988babdf9") no-repeat center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
-        h1 {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+    }
 
-        button {
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 25px;
-            background: white;
-            color: black;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .container {
+        position: relative;
+        text-align: center;
+        color: white;
+        z-index: 2;
+        animation: fadeIn 2s ease;
+    }
 
-        button:hover {
-            transform: scale(1.1);
-            background: yellow;
-        }
+    h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    p {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
 
-        #message {
-            margin-top: 20px;
-            font-size: 30px;
-            display: none;
-        }
-    </style>
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        background: #ff4e50;
+        color: white;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        background: #ff0000;
+    }
+
+    #message {
+        margin-top: 30px;
+        font-size: 32px;
+        display: none;
+        animation: pop 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+        from {opacity:0; transform:translateY(50px);}
+        to {opacity:1; transform:translateY(0);}
+    }
+
+    @keyframes pop {
+        0% {transform: scale(0);}
+        100% {transform: scale(1);}
+    }
+
+    .heart {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        animation: floatUp 4s linear infinite;
+    }
+
+    @keyframes floatUp {
+        from {transform: translateY(100vh); opacity:1;}
+        to {transform: translateY(-10vh); opacity:0;}
+    }
+</style>
+
 </head>
 
 <body>
 
-<div class="box">
-    <h1>Bấm vào đây để xem bí mật 👀</h1>
-    <button onclick="showMessage()">Bấm đi 😏</button>
-    <div id="message">Nhìn cái chó gì 😳</div>
+<div class="overlay"></div>
+
+<div class="container">
+    <h1>👀 Có điều này muốn nói với bạn...</h1>
+    <p>Bấm nút bên dưới để xem💖</p>
+    <button onclick="showMessage()">Bấm đi 😎</button>
+
+    <div id="message">😏 Tao thích mày 😏</div>
 </div>
 
 <script>
 function showMessage() {
     document.getElementById("message").style.display = "block";
 }
+
+// tạo trái tim bay
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (10 + Math.random()*20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 4000);
+}, 300);
 </script>
 
 </body>
